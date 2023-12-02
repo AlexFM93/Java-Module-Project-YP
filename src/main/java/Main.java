@@ -1,63 +1,55 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        // приветствие и количество гостей
-        System.out.println("Здравствуйте! На скольких человек необходимо разделить счёт?");
-        // глобальные переменные
-        int amountPeople = scanner.nextInt();
-        double totalSum;
-        // бесконечный цикл и выход при количестве гостей больше 1.
-        while (amountPeople <= 1) {
-            System.out.println("Это некорректное количество гостей, попробуйте снова.");
-        break;
+        public static class EndFormater {
+            String rubles = "рубль.";
         }
 
-        // сам калькулятор
-        while (true) {
-            System.out.println("Введите название товара:");
-            String inputFood = scanner.nextLine();
-            if () {
+        public static class Calculator {
+            String names = "";
+            double price;
 
+            void calculate(String inputName, double inputPrice) {
+                names = names + "\n" + inputName;
+                price += inputPrice;
             }
 
-            System.out.println("Введите сумму товара:");
-            double inputPrice = scanner.nextDouble();
-            if () {
+        }
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int countGuests;
+    double finalSum;
+    String ruble = " рубль.";
+    String finalList = "Добавленные товары:%s \n%.2f %s";
 
-            }
+    System.out.println("На скольких человек необходимо разделить счёт?");
+    countGuests = scanner.nextInt();
 
-            Food food = new Food(inputFood, inputPrice);
+    while(countGuests <= 1) {
+        System.out.println("Это некорректное значение для подсчёта. Попробуйте еще раз.");
+        countGuests = scanner.nextInt();
+    }
 
-            System.out.println("Товар успешно добавлен. Хотите добавить ещё товар? или " +
-            "введите \"Завершить\", чтобы завершить процесс добавления товара");
-            String inputEnd = scanner.nextLine();
+    Calculator calculator = new Calculator();
+    EndFormater formater = new EndFormater();
 
-            if (inputEnd.equalsIgnoreCase("Завершить")) {
-                scanner.close();
+    while(true) {
+        System.out.println("Введите название товара:");
+        String countNames = scanner.next();
+
+        System.out.println("Введите цену товара:");
+        double countPrices = scanner.nextDouble();
+
+        calculator.calculate(countNames, countPrices);
+
+        System.out.println(countNames + " успешно добавлен. Хотите добавить ещё один товар? Введите любой символ.\n"
+        + "Или введите \"Завершить\", чтобы завершить процесс добавления товаров.");
+        String isFinish = scanner.next();
+        String finish = "Завершить";
+            if (isFinish.equalsIgnoreCase(finish)) {
+                System.out.println(String.format(finalList, calculator.names, calculator.price, formater.rubles));
                 break;
-
             }
-
         }
     }
-
-
-    // классы:
-    public class Calculator {
-        double totalPrice;
-    }
-
-    public class Food {
-        String nameFood;
-        double priceFood;
-
-        Calculator(String name, double price) {
-            nameFood = name;
-            priceFood = price;
-        }
-    }
-
-    // методы:
 }
