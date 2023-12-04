@@ -22,16 +22,20 @@ class Main {
             System.out.println("Введите название товара:");
             scanner.nextLine();
             String countNames = scanner.nextLine().trim();
-            System.out.println("Введите цену товара:");
-            while(!scanner.hasNextDouble()) {
-                scanner.next();
-                typeErrorMessage();
-            }
-            double countPrices = scanner.nextDouble();
-            while (countPrices <= 0) {
-                typeErrorMessage();
-                countPrices = scanner.nextDouble();
-            }
+        while (countNames.isEmpty()) {
+            typeErrorMessage();
+            countNames = scanner.nextLine().trim();
+        }
+        System.out.println("Введите цену товара:");
+        while(!scanner.hasNextDouble()) {
+            scanner.next();
+            typeErrorMessage();
+        }
+    double countPrices = scanner.nextDouble();
+    while (countPrices <= 0) {
+        typeErrorMessage();
+        countPrices = scanner.nextDouble();
+}
             calculator.calculate(countNames, countPrices);
             System.out.println("Товар \"" + countNames + "\" успешно добавлен. Хотите добавить ещё один товар? Введите любые символы.\n"
                     + "Или введите \"Завершить\", чтобы завершить процесс добавления товаров.");
@@ -82,5 +86,3 @@ class EndFormater {
         }
     }
 }
-
-
