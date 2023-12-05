@@ -3,37 +3,30 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int countGuests;
         double finalSum;
         String finalList = "Добавленные товары:%s \n%.2f %s";
         Calculator calculator = new Calculator();
         EndFormater formater = new EndFormater();
-        System.out.println("На скольких человек необходимо разделить счёт?");
-        while (!scanner.hasNextInt()) {
-            scanner.next();
-            typeErrorMessage();
-        }
-        countGuests = scanner.nextInt();
-        while (countGuests <= 1) {
-            typeErrorMessage();
-            countGuests = scanner.nextInt();
-        }
+        CountPeople counter = new CountPeople();
+
+        int countGuests = 1;
+        countGuests = counter.countPerson(countGuests);
+
         while (true) {
             System.out.println("Введите название товара:");
-            scanner.nextLine();
             String countNames = scanner.nextLine().trim();
             while (countNames.isEmpty()) {
-                typeErrorMessage();
+                counter.typeErrorMessage();
                 countNames = scanner.nextLine().trim();
             }
             System.out.println("Введите цену товара:");
             while (!scanner.hasNextDouble()) {
                 scanner.next();
-                typeErrorMessage();
+                counter.typeErrorMessage();
             }
             double countPrices = scanner.nextDouble();
             while (countPrices <= 0) {
-                typeErrorMessage();
+                counter.typeErrorMessage();
                 countPrices = scanner.nextDouble();
             }
             calculator.calculate(countNames, countPrices);
@@ -47,10 +40,6 @@ class Main {
                 break;
             }
         }
-    }
-
-    static void typeErrorMessage() {
-        System.out.println("Это некорректное значение для подсчёта. Попробуйте еще раз.");
     }
 }
 
@@ -72,16 +61,38 @@ class EndFormater {
         double lefts = roundedEnding % 100;
         double lastDigit = lefts % 10;
         if (((lefts >= 5) && (lefts <= 20)) || (lefts == 0) ||
-        ((lastDigit >= 5) && (lastDigit <= 9))) {
+                ((lastDigit >= 5) && (lastDigit <= 9))) {
             return rubles = "рублей.";
         } else {
             if ((lefts == 2) || (lefts == 3) || (lefts == 4) ||
-            (lastDigit == 2) || (lastDigit == 3) || (lastDigit == 4)) {
+                    (lastDigit == 2) || (lastDigit == 3) || (lastDigit == 4)) {
                 return rubles = "рубля.";
             } else if (((lefts == 1)) || (lastDigit == 1)) {
                 return rubles = "рубль.";
             }
             return rubles;
         }
+    }
+}
+
+class CountPeople {
+    Scanner scanner = new Scanner(System.in);
+
+    void typeErrorMessage() {
+        System.out.println("Это некорректное значение для подсчёта. Попробуйте еще раз.");
+    }
+
+    int countPerson(int input) {
+        System.out.println("На скольких человек необходимо разделить счёт?");
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+            typeErrorMessage();
+        }
+        input = scanner.nextInt();
+        while (input <= 1) {
+            typeErrorMessage();
+            input = scanner.nextInt();
+        }
+        return input;
     }
 }
