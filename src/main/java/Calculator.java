@@ -3,7 +3,8 @@ class Calculator {
     double price;
 
     void calculate(String inputName, double inputPrice) {
-        names = names + "\n" + "\"" + inputName + "\"";
-        price += inputPrice;
+        StringBuilder builder = new StringBuilder();
+        builder.append(names += "\n" + "\"" + inputName + "\"");
+        builder.append(price += inputPrice);
     }
 }
