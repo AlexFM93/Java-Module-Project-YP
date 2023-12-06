@@ -28,8 +28,8 @@ class Main {
                     scanner.next();
                 }
                 countPrices = scanner.nextDouble();
-            } while (countPrices <= 0);
 
+            } while (countPrices <= 0);
             calculator.calculate(countNames, countPrices);
             System.out.println("Товар \"" + countNames + "\" успешно добавлен. Хотите добавить ещё один товар? Введите любые символы.\n"
                     + "Или введите \"Завершить\", чтобы завершить процесс добавления товаров.");
